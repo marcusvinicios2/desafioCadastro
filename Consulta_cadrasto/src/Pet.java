@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Locale;
 
@@ -46,6 +48,8 @@ public class Pet {
             String line;
             double guardaa = 0;
             int guarda ;
+        List<String> respostas = new ArrayList<>();
+        List<String> nomes = new ArrayList<>();
 
 
 
@@ -53,6 +57,7 @@ public class Pet {
                 while ((line = br.readLine())!= null){
                     System.out.println(line);
                     resposta = sc.nextLine();
+                    respostas.add(resposta);
                     contador++;
 
 
@@ -77,6 +82,8 @@ public class Pet {
                     }
 
                     else if (contador ==4 ) {
+                        System.out.println(" Rua: ");
+                        resposta =sc.nextLine();
                         System.out.println("Número De Casa: ");
                         String numero = sc.nextLine();
                         if (numero.trim().isEmpty()){
@@ -103,11 +110,13 @@ public class Pet {
                         if (!raca.trim().isEmpty() && !raca.matches("[a-zA-ZÀ-ÿ ]+")) {
                             throw new IllegalArgumentException("Raça não pode conter números ou caracteres especiais!");
                         }
+                        System.out.println();
                     }
                 }
             }catch (IOException | IllegalArgumentException o ){
                 System.out.println("Error"+o.getMessage());
-            }
+            }Gerador gr = new Gerador();
+        gr.gerador(respostas);
 
             Pet pet = new Pet( tipo, sexo, nome,idade,endereco, peso, raca);
             return pet;

@@ -3,5 +3,4 @@ void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     String path = "formulario.txt";
     int opcao = service.capturaropcao();
-    System.out.println("Você escolheu a opção: " + opcao);
     }
