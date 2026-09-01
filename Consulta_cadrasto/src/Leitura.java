@@ -1,6 +1,8 @@
-void main(String[] args) {
-    Service service = new Service();
-    Scanner sc = new Scanner(System.in);
-    String path = "formulario.txt";
-    int opcao = service.capturaropcao();
+public class Leitura {
+    public static void main(String[] args) {
+        Service service = new Service();
+        while (true) {
+            service.capturaropcao();
+        }
     }
+}

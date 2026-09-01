@@ -14,7 +14,7 @@ public class Gerador {
         String datahora =  LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-"));
 
-        String pasta = "C:\\Users\\PICHAU\\desafioCadastro\\petsCadastrados\\";
+        String pasta = "c:\\petsCadastrados\\";
         String path = pasta + nomePet+"_"+ "pets_" + datahora + ".txt";
 
 
