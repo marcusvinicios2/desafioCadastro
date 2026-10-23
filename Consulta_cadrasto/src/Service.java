@@ -1,7 +1,9 @@
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 
 public class Service {
     Pet pet = new Pet(null,null,null,0,null,0.0,null);
@@ -34,11 +36,19 @@ public class Service {
                     System.exit(0);
 
                 }
-
                 if (guarda == 1){
                     Pet novoPet = pet.cadrastrarpet();
-                    if (novoPet != null) {
-                        petsCadastrados.add(novoPet);
+
+                    if (novoPet.getNome().isEmpty() || novoPet.getTipo() == null || novoPet.getSexo() == null) {
+                        System.out.println("Cadastro inválido, pet não foi salvo.");
+                    } else {
+                        try {
+                            new PetDAO().salvar(novoPet);
+                            petsCadastrados.add(novoPet);
+                            System.out.println("Pet cadastrado no banco!");
+                        } catch (SQLException e) {
+                            System.out.println("Erro ao salvar: " + e.getMessage());
+                        }
                     }
                 } else if (guarda == 2) {
                     alterarPet();
