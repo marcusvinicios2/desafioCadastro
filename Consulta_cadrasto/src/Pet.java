@@ -57,6 +57,15 @@ public class Pet {
     public Sexo getSexo() {
         return sexo;
     }
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;

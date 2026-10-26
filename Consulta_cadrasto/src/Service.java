@@ -67,14 +67,21 @@ public class Service {
         }while (b == false);
         return guarda;
     }
-
     private void listarTodos() {
+        recarregar();
         if (petsCadastrados.isEmpty()) {
             System.out.println("Nenhum pet cadastrado ainda.");
             return;
         }
         for (int i = 0; i < petsCadastrados.size(); i++) {
             System.out.println((i + 1) + " - " + petsCadastrados.get(i));
+        }
+    }
+    private void recarregar() {
+        try {
+            petsCadastrados = new PetDAO().listar();
+        } catch (SQLException e) {
+            System.out.println("Erro ao carregar pets do banco: " + e.getMessage());
         }
     }
 
@@ -162,8 +169,12 @@ public class Service {
         if (!endereco.trim().isEmpty()) {
             petSelecionado.setEndereco(endereco);
         }
-
-        System.out.println("Pet atualizado com sucesso!");
+        try {
+            new PetDAO().atualizar(petSelecionado);
+            System.out.println("Pet atualizado com sucesso!");
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar: " + e.getMessage());
+        }
     }
 
     private void deletarPet() {
@@ -171,11 +182,15 @@ public class Service {
         if (petSelecionado == null) {
             return;
         }
-        petsCadastrados.remove(petSelecionado);
-        System.out.println("Pet removido com sucesso!");
+        try {
+            new PetDAO().deletar(petSelecionado.getId());
+            System.out.println("Pet removido com sucesso!");
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover: " + e.getMessage());
+        }
     }
-
     private void listarPorCriterio() {
+        recarregar();
         System.out.println("Filtrar por: 1-Nome  2-Idade  3-Raça");
         String opcao = sc.nextLine();
         List<Pet> resultado = new ArrayList<>();
